@@ -1,0 +1,14 @@
+﻿[2026-01-09
+12:45:00]
+-
+完成
+WF无限调优
+MCP
+v5.0.0
+逆向工作。修改
+extension.js
+绕过
+valid/activated
+验证，屏蔽远程校验接口。生成
+CrackingReport.md。打包生成
+cracked.vsix。

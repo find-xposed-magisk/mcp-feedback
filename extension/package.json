@@ -1,0 +1,135 @@
+{
+  "name": "wf-dialog-mcp",
+  "displayName": "WF无限调优 MCP",
+  "description": "AI对话控制面板 - 纯插件+MCP架构，一次积分多次对话",
+  "version": "5.0.0",
+  "publisher": "f",
+  "author": {
+    "name": "f",
+    "email": "f@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "AI"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "workspace",
+    "ui"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "wfDialog.show",
+        "title": "WF无限调优: 打开控制面板"
+      },
+      {
+        "command": "wfDialog.startServer",
+        "title": "WF无限调优: 启动MCP服务器"
+      },
+      {
+        "command": "wfDialog.stopServer",
+        "title": "WF无限调优: 停止MCP服务器"
+      },
+      {
+        "command": "wfDialog.addReference",
+        "title": "WF无限调优: 添加选区引用到对话",
+        "icon": "$(comment-discussion)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "wfDialog.show",
+        "key": "ctrl+shift+w",
+        "mac": "cmd+shift+w"
+      },
+      {
+        "command": "wfDialog.addReference",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r",
+        "when": "editorTextFocus && editorHasSelection"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "wfDialog.addReference",
+          "group": "navigation",
+          "when": "editorHasSelection"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "wfDialog.addReference",
+          "group": "navigation",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "wf-dialog",
+          "title": "WF无限调优",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "wf-dialog": [
+        {
+          "type": "webview",
+          "id": "wfDialog.panel",
+          "name": "控制面板"
+        }
+      ]
+    },
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "wfDialogMcp",
+        "label": "WF无限调优 MCP Server"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run webpack",
+    "compile": "tsc -p ./",
+    "webpack": "webpack --mode production",
+    "webpack-dev": "webpack --mode development",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "express": "^4.21.0",
+    "node-notifier": "^10.0.1",
+    "sql.js": "^1.13.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22",
+    "@types/node-notifier": "^8.0.5",
+    "@types/sql.js": "^1.4.9",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "javascript-obfuscator": "^5.1.0",
+    "terser-webpack-plugin": "^5.3.16",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.6.0",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-obfuscator": "^3.6.0"
+  }
+}
