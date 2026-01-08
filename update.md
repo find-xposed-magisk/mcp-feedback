@@ -12,3 +12,16 @@ valid/activated
 验证，屏蔽远程校验接口。生成
 CrackingReport.md。打包生成
 cracked.vsix。
+[2026-01-09
+13:30:00]
+-
+完成二次修改：工具名改为
+shouji-
+port
+，全量汉化参数描述，修正
+Publisher
+为
+f，修复
+VSIX
+包结构并推送至
+GitHub。

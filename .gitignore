@@ -1,5 +1,5 @@
-rm/
+# rm/
 *.zip
-*.vsix
+# *.vsix
 node_modules/
 .DS_Store
