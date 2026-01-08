@@ -1,12 +1,12 @@
 # 交互流程文檔
 
-## 🔄 AI 助手與 MCP 服務完整交互流程
+## 🔄 自動化助手與 MCP Shouji 服務完整交互流程
 
-本文檔詳細描述 AI 助手調用 MCP Feedback Enhanced 服務的完整流程，包括首次調用、多次循環調用、錯誤處理和性能優化機制。
+本文檔詳細描述自動化助手調用 MCP Shouji 服務的完整流程，包括首次調用、多次循環調用、錯誤處理和性能優化機制。
 
 ### 核心設計理念
 
-- **持久化會話**: 支援 AI 助手多次循環調用，無需重複建立連接
+- **持久化會話**: 支援自動化助手多次循環調用，無需重複建立連接
 - **智能環境適配**: 自動檢測並適配本地、SSH Remote、WSL 環境
 - **無縫狀態切換**: 會話更新時前端局部刷新，保持用戶操作狀態
 - **優雅錯誤處理**: 完整的錯誤恢復機制和超時保護
@@ -18,8 +18,8 @@
 
 ```mermaid
 sequenceDiagram
-    participant AI as AI 助手<br/>(Cursor/Claude/etc)
-    participant MCP as MCP 服務<br/>(server.py)
+    participant AI as 自動化助手<br/>(Cursor/Claude/etc)
+    participant MCP as MCP Shouji 服務<br/>(server.py)
     participant WM as WebUIManager<br/>(單例管理器)
     participant FastAPI as FastAPI 應用<br/>(Web 服務)
     participant WS as WebSocket<br/>(實時通信)
@@ -91,11 +91,11 @@ sequenceDiagram
 
 ## 🚀 第一次調用詳細流程
 
-### 1. AI 助手發起調用
+### 1. 自動化助手發起調用
 
 **MCP 工具調用格式**：
 ```python
-# AI 助手通過 MCP 協議調用
+# 自動化助手通過 MCP 協議調用
 result = await interactive_feedback(
     project_directory="./my-project",
     summary="我已完成了功能 X 的實現，請檢查代碼品質和邏輯正確性。主要變更包括：\n1. 新增錯誤處理機制\n2. 優化性能瓶頸\n3. 增加單元測試覆蓋率",
@@ -105,14 +105,14 @@ result = await interactive_feedback(
 
 **參數說明**：
 - `project_directory`: 專案根目錄，用於命令執行上下文
-- `summary`: AI 工作摘要，向用戶說明已完成的工作
+- `summary`: 工作摘要，向用戶說明已完成的工作
 - `timeout`: 等待用戶回饋的超時時間（秒）
 
 ### 2. MCP 服務處理流程
 
 ```mermaid
 flowchart TD
-    START[AI 調用 interactive_feedback] --> VALIDATE[參數驗證與類型檢查]
+    START[自動化助手調用 interactive_feedback] --> VALIDATE[參數驗證與類型檢查]
     VALIDATE --> ENV[環境檢測<br/>Local/SSH/WSL]
     ENV --> MANAGER[獲取 WebUIManager<br/>單例實例]
     MANAGER --> CHECK[檢查現有會話]
@@ -144,7 +144,7 @@ flowchart TD
 
     FEEDBACK --> PROCESS[處理回饋數據<br/>圖片壓縮/命令執行]
     PROCESS --> SAVE[保存回饋記錄]
-    SAVE --> RETURN[返回結果給 AI]
+    SAVE --> RETURN[返回結果給自動化助手]
 
     CLEANUP --> ERROR[返回超時錯誤]
     ERROR --> RETURN
@@ -397,16 +397,16 @@ async def websocket_endpoint(websocket: WebSocket):
 
 ### 持久化會話架構
 
-MCP Feedback Enhanced 的核心創新在於**持久化會話架構**，支援 AI 助手進行多次循環調用而無需重新建立連接。
+MCP Shouji 的核心創新在於**持久化會話架構**，支援 AI 助手進行多次循環調用而無需重新建立連接。
 
 ```mermaid
 stateDiagram-v2
-    [*] --> FirstCall: AI 首次調用
+    [*] --> FirstCall: 自動化助手首次調用
     FirstCall --> SessionActive: 會話建立
     SessionActive --> UserFeedback: 等待用戶回饋
     UserFeedback --> FeedbackSubmitted: 回饋提交
-    FeedbackSubmitted --> AIProcessing: AI 處理回饋
-    AIProcessing --> SecondCall: AI 再次調用
+    FeedbackSubmitted --> AIProcessing: 自動化助手處理回饋
+    AIProcessing --> SecondCall: 自動化助手再次調用
     SecondCall --> SessionUpdated: 會話更新
     SessionUpdated --> UserFeedback: 等待新回饋
 
@@ -425,9 +425,9 @@ stateDiagram-v2
 
 ### 第二次調用流程
 
-#### 1. AI 助手再次調用
+#### 1. 自動化助手再次調用
 ```python
-# AI 根據用戶回饋進行調整後再次調用
+# 自動化助手根據用戶回饋進行調整後再次調用
 result = await interactive_feedback(
     project_directory="./my-project",
     summary="根據您的建議，我已修改了錯誤處理邏輯，請再次確認",
@@ -438,7 +438,7 @@ result = await interactive_feedback(
 #### 2. 智能會話切換
 ```mermaid
 flowchart TD
-    CALL[AI 再次調用] --> CHECK[檢查現有會話]
+    CALL[自動化助手再次調用] --> CHECK[檢查現有會話]
     CHECK --> ACTIVE{有活躍會話?}
     ACTIVE -->|是| UPDATE[更新會話內容]
     ACTIVE -->|否| CREATE[創建新會話]
@@ -459,7 +459,7 @@ function handleSessionUpdated(data) {
     // 重置回饋狀態
     feedbackState = 'FEEDBACK_WAITING';
 
-    // 局部更新 AI 摘要
+    // 局部更新工作摘要
     updateAISummary(data.summary);
 
     // 清空回饋表單
@@ -494,7 +494,7 @@ sequenceDiagram
     ASM->>WS: 保存設定到服務器
 
     Note over User,WS: ⏰ 自動提交執行
-    WS->>UI: session_updated（AI 新調用）
+    WS->>UI: session_updated（自動化助手新調用）
     UI->>ASM: checkAutoSubmitConditions()
     ASM->>ASM: 檢查設定和狀態
     alt 條件滿足
@@ -842,7 +842,7 @@ async def wait_for_feedback(self, timeout: int = 600):
 
 **版本**: 2.4.3
 **最後更新**: 2025年6月14日
-**維護者**: Minidoracat
+**維護者**: f
 **架構類型**: Web-Only 四層架構
 **核心特性**: 持久化會話、智能環境適配、無縫狀態切換
 **v2.4.3 新功能**: 音效通知系統、會話管理重構、智能記憶功能

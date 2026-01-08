@@ -2,7 +2,7 @@
 
 ## 🏗️ 四層架構組件
 
-MCP Feedback Enhanced 採用清晰的四層架構設計，每層負責特定的功能領域。本文檔詳細說明各層組件的實現細節、職責分工和交互機制。
+MCP Shouji 採用清晰的四層架構設計，每層負責特定的功能領域。本文檔詳細說明各層組件的實現細節、職責分工和交互機制。
 
 ### 架構設計原則
 
@@ -17,7 +17,7 @@ MCP Feedback Enhanced 採用清晰的四層架構設計，每層負責特定的�
 ```mermaid
 graph TB
     subgraph "第一層：MCP 服務層"
-        SERVER[server.py<br/>MCP 服務器<br/>FastMCP 實現]
+        SERVER[Server.py<br/>MCP 服務器<br/>FastMCP 實現]
         TOOL[interactive_feedback<br/>核心工具<br/>參數驗證]
         I18N[i18n.py<br/>國際化支援<br/>多語言管理]
         DEBUG[debug.py<br/>統一調試<br/>日誌輸出]
@@ -105,17 +105,17 @@ graph TB
 
 ## 🔧 第一層：MCP 服務層
 
-### server.py - MCP 服務器核心
+### Server.py - MCP 服務器核心
 
 **架構實現**：
 ```python
 # 基於 FastMCP 的服務器實現
-mcp = FastMCP("mcp-feedback-enhanced")
+mcp = FastMCP("MCP Shouji")
 
 @mcp.tool()
 async def interactive_feedback(
     project_directory: Annotated[str, Field(description="專案目錄路徑")] = ".",
-    summary: Annotated[str, Field(description="AI 工作完成的摘要說明")] = "我已完成了您請求的任務。",
+    summary: Annotated[str, Field(description="工作摘要")] = "我已完成了您請求的任務。",
     timeout: Annotated[int, Field(description="等待用戶回饋的超時時間（秒）")] = 600,
 ) -> list:
     """
@@ -133,7 +133,7 @@ async def interactive_feedback(
 - **工具註冊**: 註冊 `interactive_feedback` 和 `get_system_info` 工具
 - **環境檢測**: 自動識別 Local/SSH Remote/WSL 環境
 - **生命週期管理**: 控制 Web UI 的啟動、運行和清理
-- **接口層**: 作為 AI 助手與系統的主要通信接口
+- **接口層**: 作為自動化助手與系統的主要通信接口
 
 **核心特性**：
 - 支援 MCP 2.0+ 協議標準
@@ -146,7 +146,7 @@ async def interactive_feedback(
 **工具執行流程**：
 ```mermaid
 flowchart TD
-    START[AI 助手調用] --> VALIDATE[參數驗證]
+    START[自動化助手調用] --> VALIDATE[參數驗證]
     VALIDATE --> ENV[環境檢測]
     ENV --> MANAGER[獲取 WebUIManager]
     MANAGER --> SESSION[創建/更新會話]
@@ -158,7 +158,7 @@ flowchart TD
     TIMEOUT -->|超時| CLEANUP[清理資源]
     FEEDBACK --> PROCESS[處理回饋數據]
     PROCESS --> SAVE[保存回饋記錄]
-    SAVE --> RETURN[返回結果給 AI]
+    SAVE --> RETURN[返回結果給自動化助手]
     CLEANUP --> ERROR[返回超時錯誤]
     ERROR --> RETURN
 
@@ -169,7 +169,7 @@ flowchart TD
 
 **參數說明**：
 - `project_directory`: 專案目錄路徑，用於命令執行上下文
-- `summary`: AI 工作摘要，顯示給用戶確認
+- `summary`: 工作摘要，顯示給用戶確認
 - `timeout`: 等待超時時間，預設 600 秒（10 分鐘）
 
 **返回格式**：
@@ -210,8 +210,8 @@ class I18nManager:
 ```json
 {
     "app": {
-        "title": "MCP Feedback Enhanced",
-        "subtitle": "AI 輔助開發回饋收集器"
+        "title": "MCP Shouji",
+        "subtitle": "工作摘要收集器"
     },
     "buttons": {
         "submit": "提交回饋",
@@ -308,7 +308,7 @@ stateDiagram-v2
     [*] --> WAITING: 會話創建
     WAITING --> FEEDBACK_PROCESSING: 用戶提交回饋
     FEEDBACK_PROCESSING --> FEEDBACK_SUBMITTED: 處理完成
-    FEEDBACK_SUBMITTED --> WAITING: AI 再次調用
+    FEEDBACK_SUBMITTED --> WAITING: 再次調用
     FEEDBACK_SUBMITTED --> CLEANUP: 會話結束
     CLEANUP --> [*]: 資源釋放
 
@@ -316,7 +316,7 @@ stateDiagram-v2
     TIMEOUT --> CLEANUP: 清理資源
 
     note right of WAITING
-        - 顯示 AI 摘要
+        - 顯示工作摘要
         - 等待用戶輸入
         - 支援文字/圖片/命令
     end note
@@ -329,7 +329,7 @@ stateDiagram-v2
 
     note right of FEEDBACK_SUBMITTED
         - 回饋已保存
-        - 等待 AI 處理
+        - 等待處理
         - 準備下次調用
     end note
 ```
@@ -355,7 +355,7 @@ class WebFeedbackSession:
         """等待用戶回饋，支援超時處理"""
 
     def update_session(self, project_dir: str, summary: str, timeout: int):
-        """更新會話內容，支援 AI 多次調用"""
+        """更新會話內容，支援多次調用"""
 ```
 
 **狀態枚舉**：
@@ -412,8 +412,8 @@ class WebSocketMessage:
 def create_app(manager: 'WebUIManager') -> FastAPI:
     """創建 FastAPI 應用實例"""
     app = FastAPI(
-        title="MCP Feedback Enhanced",
-        description="AI 輔助開發回饋收集系統",
+        title="MCP Shouji",
+        description="工作摘要收集系統",
         version="2.3.0"
     )
 
@@ -517,18 +517,19 @@ async def feedback_page(request: Request):
 ```
 
 **API 路由**：
-```python
-@app.get("/api/session")
-async def get_session():
-    """獲取當前會話資訊"""
 
-@app.post("/api/submit-feedback")
-async def submit_feedback(feedback_data: dict):
-    """提交用戶回饋"""
+        subgraph "WebSocket 路由"
+            WS[/ws<br/>WebSocket 連接]
+            MSG_HANDLER[訊息處理器]
+            BROADCAST[廣播機制]
+        end
 
-@app.post("/api/execute-command")
-async def execute_command(command_data: dict):
-    """執行用戶命令"""
+        subgraph "API 端點"
+            SUBMIT[POST /api/submit-feedback<br/>提交回饋]
+            COMMAND[POST /api/execute-command<br/>執行命令]
+            UPLOAD[POST /api/upload-image<br/>圖片上傳]
+            STATUS[GET /api/status<br/>系統狀態]
+        end
 
 @app.post("/api/upload-image")
 async def upload_image(file: UploadFile):
@@ -724,7 +725,7 @@ graph LR
         <!-- 頁面頭部 -->
         <header class="header">
             <div class="header-content">
-                <h1 class="title" data-i18n="app.title">MCP Feedback Enhanced</h1>
+                <h1 class="title" data-i18n="app.title">MCP Shouji</h1>
                 <div class="project-info">
                     <span data-i18n="app.projectDirectory">專案目錄</span>: {{ project_directory }}
                 </div>
@@ -1367,7 +1368,7 @@ tests/
 
 **版本**: 2.4.3
 **最後更新**: 2025年6月14日
-**維護者**: Minidoracat
+**維護者**: f
 **架構類型**: Web-Only 四層架構
 **v2.4.3 新功能**: 音效通知系統、會話管理重構、智能記憶功能
 **技術棧**: Python 3.11+, FastAPI, FastMCP, WebSocket, Web Audio API

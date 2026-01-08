@@ -1,6 +1,6 @@
 # 更新日志 (简体中文)
 
-本文件记录了 **MCP Feedback Enhanced** 的所有版本更新内容。
+本文件记录了 **MCP Shouji** 的所有版本更新内容。
 
 ## [v2.6.0] - 2025-06-28 - 智能会话管理与自动化功能强化
 
@@ -119,7 +119,7 @@
 ### 📋 使用说明
 - **桌面模式**: 在 MCP 配置中设定 `"MCP_DESKTOP_MODE": "true"` (参考 `examples/mcp-config-desktop.json`)
 - **Web 模式**: 在 MCP 配置中设定 `"MCP_DESKTOP_MODE": "false"` (默认，参考 `examples/mcp-config-web.json`)
-- **测试桌面模式**: `uvx mcp-feedback-enhanced@latest test --desktop`
+- **测试桌面模式**: `uvx mcp-shouji@latest test --desktop`
 - **构建桌面应用**: `make build-desktop-release`
 
 ---
@@ -424,4 +424,4 @@
 
 ---
 
-**完整项目信息：** [GitHub - mcp-feedback-enhanced](https://github.com/Minidoracat/mcp-feedback-enhanced)
+**完整项目信息：** [GitHub - mcp-shouji](https://github.com/f/mcp-shouji)

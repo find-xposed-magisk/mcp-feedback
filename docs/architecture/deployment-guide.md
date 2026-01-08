@@ -2,7 +2,7 @@
 
 ## 🚀 部署架構概覽
 
-MCP Feedback Enhanced 支援多種部署環境，具備智能環境檢測和自適應配置能力。
+MCP Shouji 支援多種部署環境，具備智能環境檢測和自適應配置能力。
 
 ### 部署拓撲圖
 
@@ -60,32 +60,32 @@ graph TB
 #### 1. 使用 uvx（推薦）
 ```bash
 # 直接運行
-uvx mcp-feedback-enhanced@latest web
+uvx mcp-shouji@latest web
 
 # 指定版本
-uvx mcp-feedback-enhanced@2.4.3 web
+uvx mcp-shouji@2.4.3 web
 ```
 
 #### 2. 使用 pip
 ```bash
 # 安裝
-pip install mcp-feedback-enhanced
+pip install mcp-shouji
 
 # 運行
-mcp-feedback-enhanced web
+mcp-shouji web
 ```
 
 #### 3. 從源碼安裝
 ```bash
 # 克隆倉庫
-git clone https://github.com/Minidoracat/mcp-feedback-enhanced.git
-cd mcp-feedback-enhanced
+git clone https://github.com/f/mcp-shouji.git
+cd mcp-shouji
 
 # 使用 uv 安裝
 uv sync
 
 # 運行
-uv run python -m mcp_feedback_enhanced web
+uv run python -m mcp_shouji web
 ```
 
 ## 🌍 環境配置
@@ -119,7 +119,7 @@ flowchart TD
 **配置**:
 ```bash
 # 運行命令
-mcp-feedback-enhanced web
+mcp-shouji web
 
 # 自動檢測並開啟瀏覽器
 # 默認地址: http://localhost:8000
@@ -140,13 +140,13 @@ mcp-feedback-enhanced web
 ssh user@remote-server
 
 # 安裝服務
-pip install mcp-feedback-enhanced
+pip install mcp-shouji
 ```
 
 2. **運行服務**:
 ```bash
 # 在遠程服務器運行
-mcp-feedback-enhanced web --host 0.0.0.0 --port 8000
+mcp-shouji web --host 0.0.0.0 --port 8000
 ```
 
 3. **建立 SSH 隧道**（自動或手動）:
@@ -165,7 +165,7 @@ ssh -L 8000:localhost:8000 user@remote-server
 **配置**:
 ```bash
 # 在 WSL 中運行
-mcp-feedback-enhanced web
+mcp-shouji web
 
 # 自動檢測 WSL 環境並開啟 Windows 瀏覽器
 ```
@@ -180,17 +180,17 @@ FROM python:3.12-slim
 WORKDIR /app
 COPY . .
 
-RUN pip install mcp-feedback-enhanced
+RUN pip install mcp-shouji
 
 EXPOSE 8000
 
-CMD ["mcp-feedback-enhanced", "web", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["mcp-shouji", "web", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 ```bash
 # 構建和運行
-docker build -t mcp-feedback-enhanced .
-docker run -p 8000:8000 mcp-feedback-enhanced
+docker build -t mcp-shouji .
+docker run -p 8000:8000 mcp-shouji
 ```
 
 #### Docker Compose
@@ -215,7 +215,7 @@ services:
 ### 命令行參數
 
 ```bash
-mcp-feedback-enhanced web [OPTIONS]
+mcp-shouji web [OPTIONS]
 ```
 
 | 參數 | 類型 | 預設值 | 描述 |
@@ -460,13 +460,13 @@ localStorage.getItem('combinedFeedbackTextHeight');
 netstat -tulpn | grep 8000
 
 # 解決方案：使用不同埠
-mcp-feedback-enhanced web --port 8001
+mcp-shouji web --port 8001
 ```
 
 2. **瀏覽器無法開啟**
 ```bash
 # 手動開啟瀏覽器
-mcp-feedback-enhanced web --no-browser
+mcp-shouji web --no-browser
 # 然後手動訪問 http://localhost:8000
 ```
 
@@ -482,11 +482,11 @@ ssh -L 8001:localhost:8000 user@remote-server
 #### 調試模式
 ```bash
 # 啟用詳細日誌
-mcp-feedback-enhanced web --debug
+mcp-shouji web --debug
 
 # 查看詳細錯誤信息
 export PYTHONPATH=.
-python -m mcp_feedback_enhanced.debug
+python -m mcp_shouji.debug
 ```
 
 ### 安全配置
@@ -578,10 +578,10 @@ cp ~/.mcp-feedback/prompts.json ~/.mcp-feedback/prompts.json.backup
 #### 2. 升級軟體
 ```bash
 # 使用 uvx 升級
-uvx mcp-feedback-enhanced@2.4.3 web
+uvx mcp-shouji@2.4.3 web
 
 # 或使用 pip 升級
-pip install --upgrade mcp-feedback-enhanced==2.4.3
+pip install --upgrade mcp-shouji==2.4.3
 ```
 
 #### 3. 驗證新功能
@@ -621,22 +621,22 @@ curl http://localhost:8000/health | jq '.features.smart_memory'
 
 ```bash
 # 停止服務
-pkill -f mcp-feedback-enhanced
+pkill -f mcp-shouji
 
 # 安裝舊版本
-pip install mcp-feedback-enhanced==2.4.2
+pip install mcp-shouji==2.4.2
 
 # 恢復備份設定
 cp ~/.mcp-feedback/settings.json.backup ~/.mcp-feedback/settings.json
 
 # 重新啟動服務
-mcp-feedback-enhanced web
+mcp-shouji web
 ```
 
 ---
 
 **版本**: 2.4.3
 **最後更新**: 2025年6月14日
-**維護者**: Minidoracat
+**維護者**: f
 **新功能**: 音效通知系統、會話管理重構、智能記憶功能、一鍵複製
 **完成**: 架構文檔體系已更新完成，包含 v2.4.3 版本的完整技術文檔和部署指南。

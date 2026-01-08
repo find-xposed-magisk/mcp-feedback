@@ -1,6 +1,6 @@
 # 桌面應用程式構建指南
 
-本文檔說明如何構建 MCP Feedback Enhanced 的桌面應用程式。
+本文檔說明如何構建 MCP Shouji 的桌面應用程式。
 
 ## 先決條件
 
@@ -78,19 +78,19 @@ python scripts/build_desktop.py --help
 構建完成後，產物將位於：
 
 ```
-src/mcp_feedback_enhanced/
+src/mcp_shouji/
 ├── desktop_release/                                   # 發佈用二進制文件
 │   ├── __init__.py
-│   ├── mcp-feedback-enhanced-desktop.exe              # Windows
-│   ├── mcp-feedback-enhanced-desktop-macos-intel     # macOS Intel
-│   ├── mcp-feedback-enhanced-desktop-macos-arm64     # macOS Apple Silicon
-│   └── mcp-feedback-enhanced-desktop-linux           # Linux
+│   ├── mcp-shouji-desktop.exe              # Windows
+│   ├── mcp-shouji-desktop-macos-intel     # macOS Intel
+│   ├── mcp-shouji-desktop-macos-arm64     # macOS Apple Silicon
+│   └── mcp-shouji-desktop-linux           # Linux
 ├── desktop_app/                                       # 發佈用 Python 模組
 │   ├── __init__.py
 │   └── desktop_app.py
 └── ...
 
-src-tauri/python/mcp_feedback_enhanced_desktop/        # 開發環境模組
+src-tauri/python/mcp_shouji_desktop/        # 開發環境模組
 ├── __init__.py
 ├── desktop_app.py
 └── ...
@@ -100,10 +100,10 @@ src-tauri/python/mcp_feedback_enhanced_desktop/        # 開發環境模組
 
 構建腳本會自動構建以下平台的二進制文件：
 
-- **Windows**: `mcp-feedback-enhanced-desktop.exe`
-- **macOS Intel**: `mcp-feedback-enhanced-desktop-macos-intel`
-- **macOS Apple Silicon**: `mcp-feedback-enhanced-desktop-macos-arm64`
-- **Linux**: `mcp-feedback-enhanced-desktop-linux`
+- **Windows**: `mcp-shouji-desktop.exe`
+- **macOS Intel**: `mcp-shouji-desktop-macos-intel`
+- **macOS Apple Silicon**: `mcp-shouji-desktop-macos-arm64`
+- **Linux**: `mcp-shouji-desktop-linux`
 
 桌面應用會根據運行平台自動選擇對應的二進制文件。
 
@@ -111,7 +111,7 @@ src-tauri/python/mcp_feedback_enhanced_desktop/        # 開發環境模組
 
 ```bash
 # 方法 1: 直接測試
-python -m mcp_feedback_enhanced test --desktop
+python -m mcp_shouji test --desktop
 
 # 方法 2: 使用 Makefile
 make test-desktop
@@ -121,10 +121,10 @@ make test-desktop
 
 ### Windows
 - 桌面應用程式不會顯示額外的 CMD 視窗
-- 二進制檔案: `mcp-feedback-enhanced-desktop.exe`
+- 二進制檔案: `mcp-shouji-desktop.exe`
 
 ### Linux/macOS
-- 二進制檔案: `mcp-feedback-enhanced-desktop`
+- 二進制檔案: `mcp-shouji-desktop`
 - 自動設置執行權限
 
 ## 故障排除

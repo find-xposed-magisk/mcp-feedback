@@ -1,6 +1,6 @@
 # Changelog (English)
 
-This document records all version updates for **MCP Feedback Enhanced**.
+This document records all version updates for **MCP Shouji**.
 
 ## [v2.5.6] - 2025-06-21 - Settings Save Mechanism Optimization & Interface Enhancement
 
@@ -95,7 +95,7 @@ Introducing cross-platform desktop application supporting Windows, macOS, and Li
 ### 📋 Usage Instructions
 - **Desktop Mode**: Set `"MCP_DESKTOP_MODE": "true"` in MCP configuration (refer to `examples/mcp-config-desktop.json`)
 - **Web Mode**: Set `"MCP_DESKTOP_MODE": "false"` in MCP configuration (default, refer to `examples/mcp-config-web.json`)
-- **Test Desktop Mode**: `uvx mcp-feedback-enhanced@latest test --desktop`
+- **Test Desktop Mode**: `uvx mcp-shouji@latest test --desktop`
 - **Build Desktop Application**: `make build-desktop-release`
 
 ---
@@ -400,4 +400,4 @@ This version focuses on improving system stability and user experience, particul
 
 ---
 
-**Full Project Info:** [GitHub - mcp-feedback-enhanced](https://github.com/Minidoracat/mcp-feedback-enhanced)
+**Full Project Info:** [GitHub - mcp-shouji](https://github.com/f/mcp-shouji)

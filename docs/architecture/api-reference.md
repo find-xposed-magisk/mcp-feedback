@@ -1,14 +1,14 @@
 # API 參考文檔
 
-本文檔提供 MCP Feedback Enhanced 的完整 API 參考，包括 MCP 工具、Web API、WebSocket 通信協議和內部 API 接口。
+本文檔提供 MCP Shouji 的完整 API 參考，包括 MCP 工具、Web API、WebSocket 通信協議和內部 API 接口。
 
 ## 📡 MCP 工具 API
 
-MCP Feedback Enhanced 基於 FastMCP 框架實現，提供標準的 MCP 協議支援。
+MCP Shouji 基於 FastMCP 框架實現，提供標準的 MCP 協議支援。
 
 ### interactive_feedback
 
-AI 助手與用戶進行交互式回饋的核心 MCP 工具。
+核心 MCP 工具，與用戶進行交互式回饋。
 
 #### 函數簽名
 ```python
@@ -24,7 +24,7 @@ async def interactive_feedback(
 | 參數 | 類型 | 必需 | 預設值 | 描述 |
 |------|------|------|--------|------|
 | `project_directory` | `str` | ✅ | - | 專案目錄路徑，用於上下文顯示 |
-| `summary` | `str` | ✅ | - | AI 助手的工作摘要，向用戶說明當前狀態 |
+| `summary` | `str` | ✅ | - | 自動化助手的工作摘要，向用戶說明當前狀態 |
 | `timeout` | `int` | ❌ | `600` | 等待用戶回饋的超時時間（秒） |
 
 #### 返回值
@@ -100,17 +100,17 @@ except EnvironmentError as e:
 {
     "zh-TW": {
         "app": {
-            "title": "MCP Feedback Enhanced"
+            "title": "MCP Shouji"
         }
     },
     "en": {
         "app": {
-            "title": "MCP Feedback Enhanced"
+            "title": "MCP Shouji"
         }
     },
     "zh-CN": {
         "app": {
-            "title": "MCP Feedback Enhanced"
+            "title": "MCP Shouji"
         }
     }
 }
@@ -901,7 +901,7 @@ app.add_middleware(
 
 **版本**: 2.4.3
 **最後更新**: 2025年6月14日
-**維護者**: Minidoracat
+**維護者**: f
 **API 版本**: v1
 **協議支援**: MCP 2.0+, WebSocket, HTTP/1.1, Web Audio API
 **v2.4.3 新功能**: 音效通知系統、會話管理重構、智能記憶功能、一鍵複製

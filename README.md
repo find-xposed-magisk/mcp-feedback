@@ -1,8 +1,8 @@
-# MCP Feedback Enhanced
+# MCP Shouji
 
 ## 🔧 本地定制版本说明
 
-> 感谢[原作者](https://github.com/Minidoracat/mcp-feedback-enhanced)的反馈项目，本版本修复了以下问题并新增功能：
+> 感谢[f](https://github.com/f/mcp-shouji)的反馈项目，本版本修复了以下问题并新增功能：
 
 ### ✅ 已修复问题
 
@@ -20,15 +20,15 @@ Fork 本项目到本地，在 Cursor 中配置：
 ```json
 {
   "mcpServers": {
-    "mcp-feedback-enhanced-local": {
+    "mcp-shouji-local": {
       "command": "uv",
       "args": [
         "run",
         "--directory",
-        "C:\\Users\\Administrator\\Desktop\\project\\mcp-feedback-enhanced-main",
+        "C:\\Users\\Administrator\\Desktop\\project\\mcp-shouji-main",
         "python",
         "-m",
-        "mcp_feedback_enhanced"
+        "mcp_shouji"
       ],
       "timeout": 86400,
       "env": {
@@ -45,19 +45,19 @@ Fork 本项目到本地，在 Cursor 中配置：
 ```
 
 > **注意**：请将
-> `"C:\\Users\\Administrator\\Desktop\\project\\mcp-feedback-enhanced-main"` 改
+> `"C:\\Users\\Administrator\\Desktop\\project\\mcp-shouji-main"` 改
 > 为您本地的项目位置，这样可以实现本地高自由度的定制。
 
 ### 📸 界面预览
 
 <div align="center">
-  <img src="images/0.png" width="600" alt="MCP Feedback Enhanced 界面预览" />
+  <img src="images/0.png" width="600" alt="MCP Shouji 界面预览" />
   <br>
   <em>主界面 - 支持提示管理、自动提交、会话跟踪上传图片等功能</em>
 </div>
 
 <div align="center">
-  <img src="images/1.png" width="600" alt="MCP Feedback Enhanced 功能展示" />
+  <img src="images/1.png" width="600" alt="MCP Shouji 功能展示" />
   <br>
   <em>超时功能展示 - 智能工作流程和现代化体验</em>
 </div>

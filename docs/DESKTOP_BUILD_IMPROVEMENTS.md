@@ -17,7 +17,7 @@
 #### 技術改進：
 ```yaml
 # Linux 依賴安裝
-- name: Install platform-specific dependencies (Linux)
+- name: Install platform-spemcp_shoujiencies (Linux)
   if: matrix.os == 'ubuntu-latest'
   run: |
     sudo apt-get update
@@ -67,10 +67,10 @@
 
 # 統一平台映射
 declare -A PLATFORM_MAP=(
-  ["desktop-windows"]="mcp-feedback-enhanced-desktop.exe"
-  ["desktop-macos-intel"]="mcp-feedback-enhanced-desktop-macos-intel"
-  ["desktop-macos-arm64"]="mcp-feedback-enhanced-desktop-macos-arm64"
-  ["desktop-linux"]="mcp-feedback-enhanced-desktop-linux"
+  ["desktop-windows"]="mcp-shouji-desktop.exe"
+  ["desktop-macos-intel"]="mcp-shouji-desktop-macos-intel"
+  ["desktop-macos-arm64"]="mcp-shouji-desktop-macos-arm64"
+  ["desktop-linux"]="mcp-shouji-desktop-linux"
 )
 ```
 

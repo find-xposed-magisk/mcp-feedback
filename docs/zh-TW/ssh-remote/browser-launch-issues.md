@@ -2,7 +2,7 @@
 
 ## 問題描述
 
-在 SSH Remote 環境（如 Cursor SSH Remote、VS Code Remote SSH 、WSL 等）中使用 MCP Feedback Enhanced 時，可能會遇到以下問題：
+在 SSH Remote 環境（如 Cursor SSH Remote、VS Code Remote SSH 、WSL 等）中使用 MCP Shouji 時，可能會遇到以下問題：
 
 - 🚫 瀏覽器無法自動啟動
 - ❌ 顯示「無法啟動瀏覽器」錯誤
@@ -19,7 +19,7 @@ SSH Remote 環境的限制：
 
 ### 步驟一：設定端口（可選）
 
-MCP Feedback Enhanced 預設使用端口 **8765**，您也可以自定義端口：
+MCP Shouji 預設使用端口 **8765**，您也可以自定義端口：
 
 ![設定端口](../images/ssh-remote-port-setting.png)
 
@@ -65,7 +65,7 @@ MCP Feedback Enhanced 預設使用端口 **8765**，您也可以自定義端口�
 ## 重要提醒
 
 ### ⚠️ 不要手動啟動
-**請勿**手動執行 `uvx mcp-feedback-enhanced test --web` 等指令，這樣無法與 MCP 系統整合。
+**請勿**手動執行 `uvx mcp-shouji test --web` 等指令，這樣無法與 MCP 系統整合。
 
 ### ✅ 正確流程
 1. 等待 AI 模型呼叫 MCP 工具

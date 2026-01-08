@@ -2,7 +2,7 @@
 
 ## 🏗️ 整體架構設計
 
-MCP Feedback Enhanced 採用**單一活躍會話 + 持久化 Web UI**的創新架構設計，實現 AI 助手與用戶之間的高效、無縫交互體驗。
+MCP Shouji 採用**單一活躍會話 + 持久化 Web UI**的創新架構設計，實現自動化工具與用戶之間的高效、無縫交互體驗。
 
 ### 核心設計理念
 
@@ -40,11 +40,11 @@ MCP Feedback Enhanced 採用**單一活躍會話 + 持久化 Web UI**的創新�
 
 ```mermaid
 graph TB
-    subgraph "AI 助手環境"
-        AI[AI 助手<br/>Cursor/Claude/Windsurf/Augment]
+    subgraph "自動化輔助開發回饋收集器"
+        MCP[自動化輔助開發回饋收集器]
     end
 
-    subgraph "MCP Feedback Enhanced - 四層架構"
+    subgraph "MCP Shouji - 四層架構"
         subgraph "第一層：MCP 服務層"
             SERVER[server.py<br/>MCP 服務器]
             TOOL[interactive_feedback<br/>核心工具]
@@ -94,7 +94,7 @@ graph TB
         WSL[WSL 環境]
     end
 
-    AI -->|MCP 協議| SERVER
+    MCP -->|MCP 協議| SERVER
     SERVER --> TOOL
     TOOL --> MANAGER
     MANAGER --> SESSION
@@ -184,8 +184,8 @@ graph TB
 ```mermaid
 stateDiagram-v2
     [*] --> NoSession: 系統啟動
-    NoSession --> ActiveSession: AI 首次調用
-    ActiveSession --> SessionUpdated: AI 再次調用
+    NoSession --> ActiveSession: 首次調用
+    ActiveSession --> SessionUpdated: 再次調用
     SessionUpdated --> ActiveSession: 會話切換完成
     ActiveSession --> Cleanup: 超時或手動清理
     Cleanup --> NoSession: 資源釋放
@@ -205,7 +205,7 @@ stateDiagram-v2
 - **內容局部更新**: 只更新必要的 UI 元素，保持用戶操作狀態
 
 **會話持久性**：
-- 支援 AI 助手多次循環調用
+- 支援多次循環調用
 - 會話狀態在調用間保持
 - 自動超時清理機制
 - 記憶體使用優化
@@ -357,7 +357,7 @@ auto-refresh-manager → app
 - **鍵盤快捷鍵**: 提升操作效率
 
 **連續工作流程**：
-- **連續交互**: 支援 AI 助手多次循環調用
+- **連續交互**: 支援多次循環調用
 - **狀態保持**: 用戶輸入和設定在會話間保持
 - **自動聚焦**: 新會話自動聚焦到輸入框
 - **智能預填**: 根據上下文預填常用內容
@@ -430,18 +430,10 @@ graph TB
 **從側邊欄到頁籤的遷移**：
 ```mermaid
 graph LR
-    subgraph "v2.4.2 設計"
-        SIDEBAR[左側邊欄<br/>會話管理]
-        COMPAT[瀏覽器相容性問題<br/>小視窗按鈕無法點擊]
-    end
-
-    subgraph "v2.4.3 重構"
-        TAB[獨立頁籤<br/>會話管理]
-        ENHANCED[增強功能<br/>本地存儲 + 隱私控制]
-    end
-
-    SIDEBAR -->|重構| TAB
-    COMPAT -->|解決| ENHANCED
+    A[側邊欄會話管理] --> B[頁籤會話管理]
+    B --> C[增強功能]
+    C --> D[本地存儲]
+    D --> E[隱私控制]
 ```
 
 **新增功能模組**：
@@ -484,17 +476,15 @@ graph TB
 
 ## 🔄 核心工作流程
 
-### AI 助手調用流程（v2.4.3 增強）
+### 首次調用流程（v2.4.3 增強）
 ```mermaid
 sequenceDiagram
-    participant AI as AI 助手
     participant MCP as MCP 服務
     participant WM as WebUIManager
     participant UI as Web UI
     participant AUDIO as 音效管理器
     participant User as 用戶
 
-    AI->>MCP: interactive_feedback()
     MCP->>WM: 創建/更新會話
     WM->>UI: 啟動 Web 服務
     WM->>User: 智能開啟瀏覽器
@@ -506,15 +496,15 @@ sequenceDiagram
     User->>UI: 提交回饋
     UI->>WM: WebSocket 傳送
     WM->>MCP: 回饋完成
-    MCP->>AI: 返回結果
+    MCP->>User: 返回結果
 ```
 
 ### 多次循環調用
 ```mermaid
 graph LR
-    A[AI 首次調用] --> B[用戶回饋]
-    B --> C[AI 處理回饋]
-    C --> D[AI 再次調用]
+    A[首次調用] --> B[用戶回饋]
+    B --> C[處理回饋]
+    C --> D[再次調用]
     D --> E[會話無縫更新]
     E --> F[用戶再次回饋]
     F --> G[持續循環...]
@@ -588,7 +578,7 @@ graph LR
 
 **版本**: 2.4.3
 **最後更新**: 2025年6月14日
-**維護者**: Minidoracat
+**維護者**: f
 **架構類型**: Web-Only 四層架構
 **v2.4.3 新功能**: 音效通知系統、會話管理重構、智能記憶功能、一鍵複製
 **歷史功能**: 提示詞管理、自動提交、會話管理、語系切換優化

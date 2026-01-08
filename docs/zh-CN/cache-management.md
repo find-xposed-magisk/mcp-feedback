@@ -56,7 +56,7 @@ python scripts/cleanup_cache.py --force
    ```bash
    # Windows
    taskkill /f /im uvx.exe
-   taskkill /f /im python.exe /fi "WINDOWTITLE eq *mcp-feedback-enhanced*"
+   taskkill /f /im python.exe /fi "WINDOWTITLE eq *mcp-shouji*"
 
    # 然后执行清理
    uv cache clean
@@ -64,7 +64,7 @@ python scripts/cleanup_cache.py --force
 
 ### 问题：清理后 cache 很快又变大
 
-**原因**：频繁使用 `uvx mcp-feedback-enhanced@latest`
+**原因**：频繁使用 `uvx mcp-shouji@latest`
 
 **建议**：
 1. **定期清理**：建议每周或每月清理一次
@@ -95,13 +95,13 @@ du -sh ~/.cache/uv
 | > 500MB   | 建议清理 |
 | > 1GB     | 强烈建议清理 |
 
-## 🔧 自动化清理
+## 自动化清理
 
 ### Windows 计划任务
 
 ```batch
 @echo off
-cd /d "G:\github\interactive-feedback-mcp"
+cd /d "G:\github\interactive-mcp_shoujip"
 python scripts/cleanup_cache.py --clean
 ```
 
@@ -109,10 +109,10 @@ python scripts/cleanup_cache.py --clean
 
 ```bash
 # 每周日清理一次
-0 2 * * 0 cd /path/to/interactive-feedback-mcp && python scripts/cleanup_cache.py --clean
+0 2 * * 0 cd /path/to/interactive-mcp_shoujip && python scripts/cleanup_cache.py --clean
 ```
 
-## 💡 最佳实践
+## 最佳实践
 
 1. **定期监控**：每月检查一次 cache 大小
 2. **适时清理**：当 cache 超过 500MB 时进行清理
@@ -138,5 +138,5 @@ python scripts/cleanup_cache.py --clean
 
 如果遇到清理问题，请：
 1. 查看本文档的故障排除部分
-2. 在 [GitHub Issues](https://github.com/Minidoracat/mcp-feedback-enhanced/issues) 报告问题
+2. 在 [GitHub Issues](https://github.com/f/mcp-shouji/issues) 报告问题
 3. 提供错误信息和系统信息
